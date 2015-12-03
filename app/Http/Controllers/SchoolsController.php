@@ -12,7 +12,9 @@ class SchoolsController extends Controller
               schoolName,
               abbreviation,
               location,
-              rating
+              rating,
+              id,
+              url
             FROM
               school;
         ");

@@ -28,8 +28,8 @@
         <tbody>
         @foreach($schools as $school)
             <tr>
-                <td>{{ $school-> abbreviation  }}</td>
-                <td>{{ $school->schoolName }}</td>
+                <td><a href="{{ url('/school', $school->id) }}">{{ $school-> abbreviation  }} </a></td>
+                <td><a href="{{  $school->url }}">{{ $school->schoolName }} </a></td>
                 <td>{{ $school->location }}</td>
                 <td>{{ $school->rating }}</td>
             </tr>
