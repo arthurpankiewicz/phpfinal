@@ -9,6 +9,16 @@
     <link rel="stylesheet/less" type="text/css" href="{!! url('assets/styles.less') !!}" />
     <script src="{!! url('assets/less/lessjs/dist/less.js') !!}" type="text/javascript"></script>
     <script src="{!! url('assets/jquery.tablesorter/jquery.tablesorter.js') !!}" type="text/javascript"></script>
+    <style>
+        a {
+            color: green;
+            text-decoration: none;
+        }
+        a:active, a:hover {
+            text-decoration: none;
+            color: darkseagreen;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -31,6 +41,9 @@
                 </li>
                 <li>
                     <a href="/courses">Courses</a>
+                </li>
+                <li>
+                    <a href="#">Programs</a>
                 </li>
                 <li>
                     <a href="/facebook">Sign in</a>

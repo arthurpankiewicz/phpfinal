@@ -31,8 +31,12 @@
                                 <legend class="courselegend">
                                     <h5>
                                         <i name="caret" class="fa fa-chevron-right 1x"></i>
+                                        <a href="{{ url('/school', $review->sid) }}">
+                                            {{ $review->abbreviation }}
+                                        </a>
+                                        -
                                         <a href="{{ url('/course', $review->cid) }}">
-                                            {{ $review->abbreviation }} - {{ $review->ccode }}
+                                            {{ $review->ccode }}
                                         </a>
                                         <span class="alignright">
                                             <i class="fa fa-star fa-1x"></i>
