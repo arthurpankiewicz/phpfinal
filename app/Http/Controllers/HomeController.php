@@ -13,7 +13,8 @@ class HomeController extends Controller
               review.summary,
               school.abbreviation AS abbreviation,
               course.courseCode AS ccode,
-              course.id AS cid
+              course.id AS cid,
+              school.id AS sid
             FROM
               review
             INNER JOIN course ON review.courseId = course.id

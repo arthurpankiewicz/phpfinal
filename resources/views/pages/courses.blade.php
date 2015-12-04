@@ -12,15 +12,23 @@
                     });
                 } else rows.show();
             });
-            $("#myTable").tablesorter( {sortList: [[0,0], [1,0]]} );
+            $("#myTable").tablesorter( {
+                sortList: [[2,0]]
+            });
             $('th').click(function() {
                 $(this).find('[name="caret"]').toggleClass('fa-caret-up fa-caret-down');
             });
         });
     </script>
+    <style>
+        .alignright {
+            float: right;
+            padding-right: 50px;
+        }
+    </style>
     <div class="col-md-1"></div>
     <div class="col-md-10">
-            <h1>Courses</h1>
+            <h1>Courses<span class="alignright"><a href="{{ url('/addcourse') }}">Not here? Add it!</a></span></h1>
             <input id="searchInput" placeholder="Filter by course number" class="form-control">
     <table id="myTable" class="tablesorter table table-striped table table-hover">
         <thead>
