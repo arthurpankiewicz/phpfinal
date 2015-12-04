@@ -22,7 +22,6 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
     {!! Form::open() !!}
-    {{--<form>--}}
         <div class="form-group">
             {!! Form::label('star-rating', 'Choose Your Rating:', ['class' => 'control-label col-xs-12']) !!}
             <br>
@@ -43,9 +42,13 @@
             {!! Form::label('review', 'Review:', ['class' => 'control-label col-xs-2']) !!}
             {!! Form::textarea('review', '', ['class' => 'form-control']) !!}
         </div>
+        <div class="form-horizontal">
+            {!! Form::label('author', 'Post as:') !!}<br>
+            <label>{!! Form::radio('author', 'user', true) !!} dajhfkjafhkadf</label>
+            <label>{!! Form::radio('author', 'anon') !!} Anonymous</label>
+        </div>
         {!! Form::submit('Submit My Review', ['class' => 'btn btn-primary btn-block']) !!}
         {!! Form::hidden('schoolId', $selectedCourse[0]->schoolId) !!}
-    {{--</form>--}}
     {!! Form::close() !!}
     </div>
     <div class="col-md-3"></div>

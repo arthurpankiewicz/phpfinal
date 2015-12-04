@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>Schools Hi then bye</h1>
+    <h1>Schools</h1>
     <div>
         {!! Form::open() !!}
         <div class="input-group">
