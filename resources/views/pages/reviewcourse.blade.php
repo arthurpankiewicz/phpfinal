@@ -8,6 +8,9 @@
                 }
         )
     </script>
+    <?php
+        $name = session('name');
+    ?>
 
     <div class="container">
         <div class="jumbotron">
@@ -18,7 +21,6 @@
             {{ $selectedCourse[0]->courseCode }} - {{ $selectedCourse[0]->courseName }}
             </h2>
         </div>
-
     <div class="col-md-3"></div>
     <div class="col-md-6">
     {!! Form::open() !!}
@@ -44,8 +46,13 @@
         </div>
         <div class="form-horizontal">
             {!! Form::label('author', 'Post as:') !!}<br>
-            <label>{!! Form::radio('author', 'user', true) !!} dajhfkjafhkadf</label>
-            <label>{!! Form::radio('author', 'anon') !!} Anonymous</label>
+            @if(isset($name))
+                <label>{!! Form::radio('author', 'anonymous') !!} anonymous</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label>{!! Form::radio('author', $name, true) !!} {{ $name }}</label>
+            @else
+                <label>{!! Form::radio('author', 'anonymous', true) !!} anonymous</label>
+            @endif
         </div>
         {!! Form::submit('Submit My Review', ['class' => 'btn btn-primary btn-block']) !!}
         {!! Form::hidden('schoolId', $selectedCourse[0]->schoolId) !!}

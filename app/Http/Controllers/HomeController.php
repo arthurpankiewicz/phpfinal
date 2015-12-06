@@ -14,7 +14,9 @@ class HomeController extends Controller
               school.abbreviation AS abbreviation,
               course.courseCode AS ccode,
               course.id AS cid,
-              school.id AS sid
+              school.id AS sid,
+              review.author,
+              review.datePosted
             FROM
               review
             INNER JOIN course ON review.courseId = course.id
@@ -25,4 +27,29 @@ class HomeController extends Controller
         return view('pages.home', compact('reviews'));
     }
 
+    public function myposts()
+    {
+        $name = session('name');
+        $avatar = session('avatar');
+
+        $reviews = DB::select("
+            SELECT
+              review.rating,
+              review.summary,
+              school.abbreviation AS abbreviation,
+              course.courseCode AS ccode,
+              course.id AS cid,
+              school.id AS sid,
+              review.author,
+              review.datePosted
+            FROM
+              review
+            INNER JOIN course ON review.courseId = course.id
+            INNER JOIN school ON review.schoolId = school.id
+            WHERE review.author = '" . $name . "'
+            ORDER BY review.datePosted DESC;
+        ");
+
+        return view('pages.profile', compact('reviews', 'name', 'avatar'));
+    }
 }

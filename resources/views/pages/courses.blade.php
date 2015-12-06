@@ -38,6 +38,7 @@
             <th width="550px"><i name="caret" class="fa fa-caret-up fa-1x"></i></th>
             <th width="100px"><i name="caret" class="fa fa-caret-up fa-1x"></i></th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody id="fbody">
@@ -66,6 +67,11 @@
                         <a href="{{ url('/reviewcourse', $course->cid) }}">
                             {{--<i class="fa fa-commenting-o fa-1x"></i>--}}
                             Review
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('/course', $course->cid) }}">
+                            <i class="fa fa-comment fa-1x"></i>
                         </a>
                     </td>
                 </tr>

@@ -1,3 +1,7 @@
+<?php
+    $name = session('name');
+    $avatar = session('avatar');
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,13 +14,26 @@
     <script src="{!! url('assets/less/lessjs/dist/less.js') !!}" type="text/javascript"></script>
     <script src="{!! url('assets/jquery.tablesorter/jquery.tablesorter.js') !!}" type="text/javascript"></script>
     <style>
-        a {
+        a, a:visited {
             color: green;
             text-decoration: none;
         }
         a:active, a:hover {
             text-decoration: none;
             color: darkseagreen;
+        }
+        .navbar-nav {
+            height: 50px;
+        }
+        .userdropdown {
+            display: none;
+            position: absolute;
+            width: 100px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .user:hover > .userdropdown {
+            display: block;
         }
     </style>
 </head>
@@ -45,8 +62,16 @@
                 <li>
                     <a href="#">Programs</a>
                 </li>
-                <li>
-                    <a href="/facebook">Sign in</a>
+                <li class="user">
+                    @if(isset($name))
+                        <?php echo "<a href='#'><img src= " . $avatar . " width='25'></a>"; ?>
+                        <ul class="userdropdown list-group">
+                            <li class="list-group-item"><a href="../myposts">My Posts</a></li>
+                            <li class="list-group-item"><a href="../signmeout">Sign Out</a></li>
+                        </ul>
+                    @else
+                        <a href="/facebook">Sign in</a>
+                    @endif
                 </li>
                 <li>
                     <a href="/reviewcourse">Contact</a>

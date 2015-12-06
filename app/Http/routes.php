@@ -32,6 +32,16 @@ Route::post('reviewcourse/{id}', 'CoursesController@reviewedCourse');
 
 Route::get('addcourse', 'CoursesController@addCourse');
 
-//Facebook Login
-Route::get('/facebook', 'FacebookController@facebook');
-Route::get('/callback', 'FacebookController@callback');
+////Facebook Login
+//Route::get('/facebook', 'FacebookController@facebook');
+//Route::get('/callback', 'FacebookController@callback');
+
+Route::get('/facebook', 'Auth\AuthController@redirectToProvider');
+Route::get('/facebook/callback', 'Auth\AuthController@handleProviderCallBack');
+
+Route::get('/signmeout', function() {
+    Session::flush();
+    return redirect()->action('HomeController@home');
+});
+
+Route::get('/myposts', 'HomeController@myposts');

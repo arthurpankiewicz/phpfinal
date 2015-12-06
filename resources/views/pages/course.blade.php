@@ -5,6 +5,7 @@
         .alignright {
             float: right;
             padding-right: 50px;
+            font-size: 85%;
         }
     </style>
     <div class="container">
@@ -18,8 +19,11 @@
                 <a href="{{ url('/school', $course[0]->schoolId) }}">
                     {{ $course[0]->abbreviation }}</a> - {{ $course[0]->schoolName }}
                 <span class="alignright">
-                    <i class="fa fa-star"></i>
-                    {{ $averageReview }}
+                    @if( ! isset($averageReview))
+                        No reviews.
+                    @else
+                        {{ $averageReview }} <i class="fa fa-star"></i> out of {{ $numberOfRatings }} reviews.
+                    @endif
                 </span>
             </h3>
         </div>
@@ -40,6 +44,13 @@
                         <td>
                             <i class="fa fa-star fa-1x"></i>
                             {{ $review->rating / 10 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <span class="alignright">
+                                <i>{{ $review->datePosted }} by {{$review->author}} </i>
+                            </span>
                         </td>
                     </tr>
                 @endforeach

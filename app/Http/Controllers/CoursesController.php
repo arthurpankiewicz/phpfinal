@@ -43,7 +43,9 @@ class CoursesController extends Controller
         $reviews = DB::select("
             SELECT
               review.summary,
-              review.rating
+              review.rating,
+              review.datePosted,
+              review.author
             FROM
               review
             INNER JOIN course ON review.courseId = course.id
@@ -59,13 +61,14 @@ class CoursesController extends Controller
            WHERE review.courseId = $id;
         ");
 
+        $numberOfRatings = $reviewSum[0]->numberOfRatings;
         $averageReview = null;
         if(isset($reviewSum[0]->totalRating)) {
             $averageReview = $reviewSum[0]->totalRating / $reviewSum[0]->numberOfRatings / 10;
             $averageReview = round($averageReview, 1);
         }
 
-        return view('pages.course', compact('course', 'reviews', 'averageReview'));
+        return view('pages.course', compact('course', 'reviews', 'averageReview', 'numberOfRatings'));
     }
 
     public function reviewCourse($id)
@@ -89,13 +92,17 @@ class CoursesController extends Controller
 
     public function reviewedCourse($id)
     {
+        if( ! isset($_POST['rating']))
+            return redirect()->back();
+
         $rating = $_POST['rating'];
         $rating = $rating * 10;
         $summary = $_POST['review'];
         $summary = strip_tags($summary);
         $schoolId = $_POST['schoolId'];
+        $author = $_POST['author'];
         $t = time();
-        $t = date("Y-m-d", $t);
+        $t = date("Y-m-d H:i", $t);
 
         $insert = DB::table('review')
             ->insert([
@@ -104,7 +111,8 @@ class CoursesController extends Controller
                 'schoolId' => $schoolId,
                 'rating' => $rating,
                 'summary' => $summary,
-                'datePosted' => $t
+                'datePosted' => $t,
+                'author' => $author
             ]);
 
         return redirect()->action('CoursesController@course', [$id]);

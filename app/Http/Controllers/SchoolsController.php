@@ -9,17 +9,19 @@ class SchoolsController extends Controller
     {
         $schools = DB::select("
             SELECT
-              schoolName,
-              abbreviation,
-              location,
-              rating,
-              id,
-              url
+              school.schoolName,
+              school.abbreviation,
+              school.location,
+              school.id AS sid,
+              school.url,
+              (SELECT SUM(review.rating) FROM review WHERE review.schoolId = sid) AS totalRating,
+              (SELECT COUNT(review.rating) FROM review WHERE review.schoolId = sid) AS numberOfRatings,
+              (SELECT(totalRating / numberOfRatings)) AS avgRating
             FROM
               school;
         ");
 
-        return view('pages.schools', compact('schools'));
+        return view('pages.schools', compact('schools', 'averageReview'));
     }
 
     public function school($id)
@@ -38,10 +40,13 @@ class SchoolsController extends Controller
 
         $courses = DB::select("
             SELECT
-              course.id,
+              course.id AS cid,
               course.courseCode,
               course.courseName,
-              course.rating
+              course.rating,
+              (SELECT SUM(review.rating) FROM review WHERE review.courseId = cid) AS totalRating,
+              (SELECT COUNT(review.rating) FROM review WHERE review.courseId = cid) AS numberOfRatings,
+              (SELECT(totalRating / numberOfRatings)) AS avgRating
             FROM
               course
             INNER JOIN school ON course.schoolId = school.id

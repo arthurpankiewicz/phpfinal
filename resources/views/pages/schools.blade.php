@@ -2,39 +2,41 @@
 
 @section('content')
 
-    <h1>Schools</h1>
-    <div>
-        {!! Form::open() !!}
-        <div class="input-group">
-            {!! Form::text('search', null, array('required',
-                            'class'=>'form-control', 'placeholder'=>'')) !!}
-            <span class="input-group-btn">
-                {!! Form::submit('Filter', array('class'=>'btn btn-primary')) !!}
-            </span>
+    <div class="container">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h1>Schools</h1>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                </thead>
+                <tbody>
+                @foreach($schools as $school)
+                    <tr>
+                        <td><a href="{{  $school->url }}">{{ $school-> abbreviation  }} </a></td>
+                        <td><a href="{{ url('/school', $school->sid) }}">{{ $school->schoolName }} </a></td>
+                        <td>
+                            @if($school->avgRating == 0)
+                                -
+                            @else
+                                <i class="fa fa-star fa-1x"></i>
+                                {{ round($school->avgRating, 0) / 10}}
+                            @endif
+                        </td>
+                        <td>{{ $school->location }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
-        {!! Form::close()  !!}
+    <div class="col-md-1"></div>
     </div>
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-
-        </thead>
-        <tbody>
-        @foreach($schools as $school)
-            <tr>
-                <td><a href="{{ url('/school', $school->id) }}">{{ $school-> abbreviation  }} </a></td>
-                <td><a href="{{  $school->url }}">{{ $school->schoolName }} </a></td>
-                <td>{{ $school->location }}</td>
-                <td>{{ $school->rating }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
 
 @stop

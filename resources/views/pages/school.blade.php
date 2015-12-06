@@ -12,6 +12,12 @@
                     });
                 } else rows.show();
             });
+            $("#myTable").tablesorter( {
+                sortList: [[2,0]]
+            });
+            $('th').click(function() {
+                $(this).find('[name="caret"]').toggleClass('fa-caret-up fa-caret-down');
+            });
         });
     </script>
     <style>
@@ -38,10 +44,12 @@
         <div>
             <input id="searchInput" placeholder="Filter by course number" class="form-control">
         </div>
-        <table class="table table-striped table table-hover">
+        <table id="myTable" class="tablesorter table table-striped table table-hover">
             <thead>
             <tr>
-                <th></th>
+                <th width="100px"><i name="caret" class="fa fa-caret-up fa-1x"></i></th>
+                <th width="550px"><i name="caret" class="fa fa-caret-up fa-1x"></i></th>
+                <th width="100px"><i name="caret" class="fa fa-caret-up fa-1x"></i></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -50,15 +58,27 @@
             @foreach($courses as $course)
                 <tr>
                     <td width="100">
-                        <a href="{{ url('/course', $course->id) }}">
+                        <a href="{{ url('/course', $course->cid) }}">
                             {{ $course->courseCode }}
                         </a>
                     </td>
                     <td width="600">{{ $course->courseName }}</td>
-                    <td>{{ $course->rating }}</td>
                     <td>
-                        <a href="{{ url('/reviewcourse', $course->id) }}">
-                            <i class="fa fa-commenting-o fa-1x"></i>
+                        @if($course->avgRating == 0)
+                            -
+                        @else
+                            <i class="fa fa-star fa-1x"></i>
+                            {{ round($course->avgRating, 1) / 10}}
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ url('/reviewcourse', $course->cid) }}">
+                            Review
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('/course', $course->cid) }}">
+                            <i class="fa fa-comment fa-1x"></i>
                         </a>
                     </td>
                 </tr>
