@@ -23,6 +23,10 @@
                 @foreach($reviews as $review)
                     <tr>
                         <td>
+                            <a href="{{ url('/school', $review->sid) }}">{{ $review->abbreviation }}</a>
+                            -
+                            <a href="{{ url('/course', $review->cid) }}">{{ $review->ccode }}</a>
+                            <br><br>
                             {{ $review->summary }}
                         </td>
                         <td>

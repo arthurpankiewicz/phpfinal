@@ -102,7 +102,6 @@ class CoursesController extends Controller
         $summary = strip_tags($summary);
         $schoolId = $_POST['schoolId'];
         $author = $_POST['author'];
-        $authorId = session('authorId');
         $t = time();
         $t = date("Y-m-d H:i", $t);
 
@@ -115,7 +114,6 @@ class CoursesController extends Controller
                 'summary' => $summary,
                 'datePosted' => $t,
                 'author' => $author,
-                'authorId' => $authorId
             ]);
 
         return redirect()->action('CoursesController@course', [$id]);
@@ -124,8 +122,41 @@ class CoursesController extends Controller
     public function addCourse()
     {
         $schoolDropdown = DB::table('school')->lists('abbreviation', 'id');
-        $courseDropdown = DB::table('course')->lists('courseCode', 'id');
 
-        return view('pages.addCourse', compact('schoolDropdown', 'courseDropdown<'));
+        return view('pages.addCourse', compact('schoolDropdown'));
+    }
+
+    public function addedCourse()
+    {
+        $schoolDropdown = DB::table('school')->lists('abbreviation', 'id');
+        $schoolId = $_POST['school'];
+        $schoolId = intval($schoolId);
+        $courseCode = $_POST['subjectCode'] . " " .  $_POST['courseCode'];
+        $courseName = $_POST['courseName'];
+
+        $exists = DB::select("
+            SELECT
+              course.courseCode,
+              course.schoolId
+            FROM
+              course
+            WHERE
+              course.courseCode = '" . $courseCode . "'
+            AND
+              course.schoolId = '" . $schoolId . "';
+        ");
+        if((empty($exists))) {
+            DB::table('course')
+                ->insert([
+                    'id' => null,
+                    'courseCode' => $courseCode,
+                    'courseName' => $courseName,
+                    'schoolId' => $schoolId
+                ]);
+
+            return redirect()->action('CoursesController@courses');
+        } else {
+            return view('pages.addcourse', compact('exists', 'schoolDropdown'));
+        }
     }
 }

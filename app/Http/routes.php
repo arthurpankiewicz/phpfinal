@@ -31,6 +31,7 @@ Route::get('reviewcourse/{id}', 'CoursesController@reviewCourse');
 Route::post('reviewcourse/{id}', 'CoursesController@reviewedCourse');
 
 Route::get('addcourse', 'CoursesController@addCourse');
+Route::post('addcourse', 'CoursesController@addedCourse');
 
 ////Facebook Login
 //Route::get('/facebook', 'FacebookController@facebook');

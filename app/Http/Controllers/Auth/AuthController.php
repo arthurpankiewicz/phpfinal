@@ -83,7 +83,6 @@ class AuthController extends Controller
 
         session()->put('name', $user->getName());
         session()->put('avatar', $user->getAvatar());
-        session()->put('id', $user->getId());
 
 //        dd($user);
 

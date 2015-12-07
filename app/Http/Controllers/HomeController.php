@@ -31,7 +31,6 @@ class HomeController extends Controller
     {
         $name = session('name');
         $avatar = session('avatar');
-        $authorId = session('authorId');
 
         $reviews = DB::select("
             SELECT
@@ -47,7 +46,7 @@ class HomeController extends Controller
               review
             INNER JOIN course ON review.courseId = course.id
             INNER JOIN school ON review.schoolId = school.id
-            WHERE review.authorId = '" . $authorId . "'
+            WHERE review.author = '" . $name . "'
             ORDER BY review.datePosted DESC;
         ");
 
