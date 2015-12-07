@@ -26,7 +26,7 @@
     <div class="col-md-1"></div>
     <div class="col-md-10">
             <h1>Courses<span class="alignright"><a href="{{ url('/addcourse') }}">Not here? Add it!</a></span></h1>
-            <input id="searchInput" placeholder="Filter by course number" class="form-control">
+            <input id="searchInput" type="number" placeholder="Filter by course number" class="form-control">
     <table id="myTable" class="tablesorter table table-striped table table-hover">
         <thead>
         <tr>

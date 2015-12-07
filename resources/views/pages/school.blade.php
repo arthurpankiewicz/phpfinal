@@ -13,7 +13,7 @@
                 } else rows.show();
             });
             $("#myTable").tablesorter( {
-                sortList: [[2,0]]
+                sortList: [[1,0]]
             });
         });
     </script>

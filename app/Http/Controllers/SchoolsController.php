@@ -43,7 +43,6 @@ class SchoolsController extends Controller
               course.id AS cid,
               course.courseCode,
               course.courseName,
-              course.rating,
               (SELECT SUM(review.rating) FROM review WHERE review.courseId = cid) AS totalRating,
               (SELECT COUNT(review.rating) FROM review WHERE review.courseId = cid) AS numberOfRatings,
               (SELECT(totalRating / numberOfRatings)) AS avgRating
