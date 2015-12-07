@@ -50,7 +50,8 @@ class CoursesController extends Controller
               review
             INNER JOIN course ON review.courseId = course.id
             INNER JOIN school ON review.schoolId = school.id
-            WHERE course.id = $id;
+            WHERE course.id = $id
+            ORDER BY review.datePosted DESC;
         ");
         $reviewSum = DB::select("
            SELECT
@@ -101,6 +102,7 @@ class CoursesController extends Controller
         $summary = strip_tags($summary);
         $schoolId = $_POST['schoolId'];
         $author = $_POST['author'];
+        $authorId = session('authorId');
         $t = time();
         $t = date("Y-m-d H:i", $t);
 
@@ -112,7 +114,8 @@ class CoursesController extends Controller
                 'rating' => $rating,
                 'summary' => $summary,
                 'datePosted' => $t,
-                'author' => $author
+                'author' => $author,
+                'authorId' => $authorId
             ]);
 
         return redirect()->action('CoursesController@course', [$id]);

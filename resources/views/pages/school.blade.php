@@ -15,9 +15,6 @@
             $("#myTable").tablesorter( {
                 sortList: [[2,0]]
             });
-            $('th').click(function() {
-                $(this).find('[name="caret"]').toggleClass('fa-caret-up fa-caret-down');
-            });
         });
     </script>
     <style>
@@ -42,14 +39,14 @@
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <div>
-            <input id="searchInput" placeholder="Filter by course number" class="form-control">
+            <input id="searchInput" type="number" placeholder="Filter by course number" class="form-control">
         </div>
         <table id="myTable" class="tablesorter table table-striped table table-hover">
             <thead>
             <tr>
-                <th width="100px"><i name="caret" class="fa fa-caret-up fa-1x"></i></th>
-                <th width="550px"><i name="caret" class="fa fa-caret-up fa-1x"></i></th>
-                <th width="100px"><i name="caret" class="fa fa-caret-up fa-1x"></i></th>
+                <th width="100px"><i name="caret" class="fa fa-caret-down fa-1x"></i></th>
+                <th width="550px"><i name="caret" class="fa fa-caret-down fa-1x"></i></th>
+                <th width="100px"><i name="caret" class="fa fa-caret-down fa-1x"></i></th>
                 <th></th>
                 <th></th>
             </tr>

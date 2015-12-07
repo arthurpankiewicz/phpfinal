@@ -59,9 +59,6 @@
                 <li>
                     <a href="/courses">Courses</a>
                 </li>
-                <li>
-                    <a href="#">Programs</a>
-                </li>
                 <li class="user">
                     @if(isset($name))
                         <?php echo "<a href='#'><img src= " . $avatar . " width='25'></a>"; ?>
@@ -72,9 +69,6 @@
                     @else
                         <a href="/facebook">Sign in</a>
                     @endif
-                </li>
-                <li>
-                    <a href="/reviewcourse">Contact</a>
                 </li>
             </ul>
         </div>
